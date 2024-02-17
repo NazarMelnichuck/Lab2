@@ -11,7 +11,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,18 +34,20 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun PageContent() {
+    var page by remember { mutableStateOf(1) }
+
     Column(
         modifier = Modifier.padding(20.dp),
     ) {
-        Text(text = "Page 1", modifier = Modifier.padding(bottom = 16.dp))
+        Text(text = "Page $page", modifier = Modifier.padding(bottom = 16.dp))
         Row() {
-            Button(onClick = {}) {
+            Button(onClick = { if (page > 1) page-- }) {
                 Text(text = "Назад")
             }
             Button(
                 modifier = Modifier
                     .padding(start = 16.dp),
-                onClick = {}) {
+                onClick = { page++ }) {
                 Text(text = "Вперед")
             }
         }
